@@ -2,7 +2,7 @@
 #define APP_H
 
 #include "window.h"
-#include "default_callbacks.h"
+#include "callbacks.h"
 #include "event.h"
 
 typedef struct App {
