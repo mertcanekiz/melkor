@@ -3,28 +3,30 @@
 
 #include <time.h>
 
-/* Defines */
-#define EVENT_CATEGORY_NONE        0
-#define EVENT_CATEGORY_APP         1 << 1
-#define EVENT_CATEGORY_INPUT       1 << 2
-#define EVENT_CATEGORY_KEYBOARD    1 << 3
-#define EVENT_CATEGORY_MOUSE       1 << 4
-#define EVENT_CATEGORY_MOUSEBUTTON 1 << 5
-
 /* Enums */
 typedef enum EventType {
-    NONE = 0,
+    EVENTTYPE_NONE = 0,
     WINDOW_CLOSE, WINDOW_SIZE, WINDOW_FOCUS, WINDOW_POS,
     KEY_PRESS, KEY_RELEASE, KEY_TYPE,
     MOUSE_BUTTON_PRESS, MOUSE_BUTTON_RELEASE, SCROLL, CURSOR_POS,
     APP_TICK, APP_UPDATE, APP_RENDER
 } EventType;
 
+typedef enum EventCategory {
+    EVENTCATEGORY_NONE = 0,
+    APP           = 1 << 0,
+    INPUT         = 1 << 1,
+    KEYBOARD      = 1 << 2,
+    MOUSE         = 1 << 3,
+    MOUSEBUTTON   = 1 << 4
+} EventCategory;
+
 /* Structs */
 typedef struct Event
 {
     time_t created_at;
     EventType type;
+    EventCategory category;
 } Event;
 
 typedef struct WindowCloseEvent

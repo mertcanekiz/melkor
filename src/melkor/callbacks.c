@@ -14,7 +14,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case GLFW_PRESS:
             {
                 KeyPressEvent event = {
-                    { time(0), KEY_PRESS },
+                    { time(0), KEY_PRESS, INPUT | KEYBOARD },
                     key,
                     0
                 };
@@ -24,7 +24,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case GLFW_RELEASE:
             {
                 KeyReleaseEvent event = {
-                    { time(0), KEY_RELEASE },
+                    { time(0), KEY_RELEASE, INPUT | KEYBOARD },
                     key
                 };
                 data->event_callback((Event*)(&event));
@@ -33,7 +33,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
         case GLFW_REPEAT:
             {
                 KeyPressEvent event = {
-                    { time(0), KEY_PRESS },
+                    { time(0), KEY_PRESS, INPUT | KEYBOARD },
                     key,
                     1
                 };
@@ -47,7 +47,7 @@ void char_callback(GLFWwindow* window, unsigned int codepoint)
 {
     WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
     KeyTypeEvent event = {
-        { time(0), KEY_TYPE },
+        { time(0), KEY_TYPE, INPUT | KEYBOARD },
         codepoint
     };
     data->event_callback((Event*)(&event));
@@ -57,7 +57,7 @@ void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos)
 {
     WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
     CursorPosEvent event = {
-        { time(0), CURSOR_POS },
+        { time(0), CURSOR_POS, INPUT | MOUSE },
         xpos, ypos
     };
     data->event_callback((Event*)(&event));
@@ -67,7 +67,7 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
     WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
     ScrollEvent event = {
-        { time(0), SCROLL },
+        { time(0), SCROLL, INPUT | MOUSE },
         xoffset, yoffset
     };
     data->event_callback((Event*)(&event));
@@ -80,7 +80,7 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         case GLFW_PRESS:
         {
             MouseButtonPressEvent event = {
-                { time(0), MOUSE_BUTTON_PRESS },
+                { time(0), MOUSE_BUTTON_PRESS, INPUT | MOUSE | MOUSEBUTTON },
                 button, mods
             };
             data->event_callback((Event*)(&event));
@@ -89,7 +89,7 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
         case GLFW_RELEASE:
         {
             MouseButtonReleaseEvent event = {
-                { time(0), MOUSE_BUTTON_RELEASE },
+                { time(0), MOUSE_BUTTON_RELEASE, INPUT | MOUSE | MOUSEBUTTON },
                 button, mods
             };
             data->event_callback((Event*)(&event));
@@ -102,7 +102,7 @@ void window_size_callback(GLFWwindow* window, int width, int height)
 {
     WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
     WindowSizeEvent event = {
-        { time(0), WINDOW_SIZE },
+        { time(0), WINDOW_SIZE, APP },
         width,
         height
     };
@@ -113,7 +113,7 @@ void window_pos_callback(GLFWwindow* window, int xpos, int ypos)
 {
     WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
     WindowPosEvent event = {
-        { time(0), WINDOW_POS },
+        { time(0), WINDOW_POS, APP },
         xpos,
         ypos
     };
