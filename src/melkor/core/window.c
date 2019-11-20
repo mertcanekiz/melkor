@@ -54,6 +54,17 @@ void event_callback(Event *event)
             printf("WindowPosEvent: %d %d\n", e->xpos, e->ypos);
             break;
         }
+        case WINDOW_FOCUS:
+        {
+            WindowFocusEvent* e = (WindowFocusEvent*)event;
+            printf("WindowFocusEvent: %s focus\n", e->focus ? "Gained" : "Lost");
+            break;
+        }
+        case WINDOW_CLOSE:
+        {
+            printf("WindowCloseEvent\n");
+            break;
+        }
         default:
             printf("Unknown event\n");
     }
@@ -63,6 +74,7 @@ Window* create_window(const char* title, uint16_t width,
                       uint16_t height, bool fullscreen)
 {
     if (!glfwInit()) {
+        printf("Could not initialize GLFW\n");
         return NULL;
     }
     Window *window = malloc(sizeof(Window));
@@ -75,6 +87,7 @@ Window* create_window(const char* title, uint16_t width,
     window->handle = glfwCreateWindow(
             width, height, title, NULL, NULL);
     if (!window->handle) {
+        printf("Could not create GLFW window\n");
         glfwTerminate();
         free(window);
         return NULL;
@@ -111,6 +124,9 @@ void set_callback(Window *window, CallbackType type, void* callback)
             break;
         case WINDOW_POS_CALLBACK:
             glfwSetWindowPosCallback(window->handle, (WindowPosCallback)callback);
+            break;
+        case WINDOW_FOCUS_CALLBACK:
+            glfwSetWindowFocusCallback(window->handle, (WindowFocusCallback)callback);
             break;
         default:
             printf("Invalid callback type: %d\n", type);

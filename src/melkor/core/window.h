@@ -18,6 +18,7 @@ typedef void (*ScrollCallback)(GLFWwindow *window, double xoffset, double yoffse
 typedef void (*WindowCloseCallback)(GLFWwindow* window);
 typedef void (*WindowSizeCallback)(GLFWwindow* window, int width, int height);
 typedef void (*WindowPosCallback)(GLFWwindow* window, int xpos, int ypos);
+typedef void (*WindowFocusCallback)(GLFWwindow* window, int focus);
 typedef void (*EventCallback)(Event*);
 
 typedef enum CallbackType {
@@ -28,7 +29,8 @@ typedef enum CallbackType {
     SCROLL_CALLBACK,
     WINDOW_CLOSE_CALLBACK,
     WINDOW_SIZE_CALLBACK,
-    WINDOW_POS_CALLBACK
+    WINDOW_POS_CALLBACK,
+    WINDOW_FOCUS_CALLBACK
 } CallbackType;
 
 // typedef struct WindowData WindowData;

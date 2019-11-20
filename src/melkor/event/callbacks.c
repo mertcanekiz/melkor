@@ -4,7 +4,11 @@
 
 void window_close_callback(GLFWwindow* window)
 {
-    printf("WindowCloseEvent\n");
+    WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
+    WindowCloseEvent event = {
+        { time(0), WINDOW_CLOSE, APP }
+    };
+    data->event_callback((Event*)(&event));
 }
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -120,3 +124,14 @@ void window_pos_callback(GLFWwindow* window, int xpos, int ypos)
     data->event_callback((Event*)(&event));
 }
 
+
+void window_focus_callback(GLFWwindow* window, int focus)
+{
+    WindowData *data = (WindowData*)glfwGetWindowUserPointer(window);
+    WindowFocusEvent event =
+    {
+        { time(0), WINDOW_FOCUS, APP },
+        focus
+    };
+    data->event_callback((Event*)(&event));
+}

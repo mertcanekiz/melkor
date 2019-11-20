@@ -92,4 +92,9 @@ typedef struct WindowSizeEvent {
     int width;
     int height;
 } WindowSizeEvent;
+
+typedef struct WindowFocusEvent {
+    Event super;
+    bool focus;
+} WindowFocusEvent;
 #endif
