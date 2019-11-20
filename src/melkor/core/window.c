@@ -12,62 +12,8 @@ void update_window(Window *window)
 
 void event_callback(Event *event)
 {
-    printf("[%ld] ", event->created_at);
-    switch(event->type)
-    {
-        case KEY_PRESS:
-            printf("KeyPressEvent: %d\n", ((KeyPressEvent*)event)->key);
-            break;
-        case KEY_RELEASE:
-            printf("KeyReleaseEvent: %d\n", ((KeyReleaseEvent*)event)->key);
-            break;
-        case KEY_TYPE:
-            printf("KeyTypeEvent: %c\n", ((KeyTypeEvent*)event)->key);
-            break;
-        case CURSOR_POS:
-            printf("CursorPosEvent: %f, %f\n", ((CursorPosEvent*)event)->xpos, ((CursorPosEvent*)event)->ypos);
-            break;
-        case SCROLL:
-            printf("ScrollEvent: %f, %f\n", ((ScrollEvent*)event)->xoffset, ((ScrollEvent*)event)->yoffset);
-            break;
-        case MOUSE_BUTTON_PRESS:
-            {
-                MouseButtonPressEvent* e = (MouseButtonPressEvent*)event;
-                printf("MouseButtonPressEvent: %d %d\n", e->button, e->mods);
-                break;
-            }
-        case MOUSE_BUTTON_RELEASE:
-            {
-                MouseButtonReleaseEvent* e = (MouseButtonReleaseEvent*)event;
-                printf("MouseButtonReleaseEvent: %d %d\n", e->button, e->mods);
-                break;
-            }
-        case WINDOW_SIZE:
-        {
-            WindowSizeEvent* e = (WindowSizeEvent*)event;
-            printf("WindowSizeEvent: %d %d\n", e->width, e->height);
-            break;
-        }
-        case WINDOW_POS:
-        {
-            WindowPosEvent* e = (WindowPosEvent*)event;
-            printf("WindowPosEvent: %d %d\n", e->xpos, e->ypos);
-            break;
-        }
-        case WINDOW_FOCUS:
-        {
-            WindowFocusEvent* e = (WindowFocusEvent*)event;
-            printf("WindowFocusEvent: %s focus\n", e->focus ? "Gained" : "Lost");
-            break;
-        }
-        case WINDOW_CLOSE:
-        {
-            printf("WindowCloseEvent\n");
-            break;
-        }
-        default:
-            printf("Unknown event\n"); // This should never happen
-    }
+    // Default event handler
+    // Intentionally left blank
 }
 
 Window* create_window(const char* title, uint16_t width,

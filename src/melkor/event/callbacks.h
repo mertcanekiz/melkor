@@ -1,7 +1,10 @@
 #ifndef DEFAULT_CALLBACKS_H
 #define DEFAULT_CALLBACKS_H
 
-#include "core/window.h"
+#include <GLFW/glfw3.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 void window_close_callback(GLFWwindow*);
 void window_size_callback(GLFWwindow* window, int width, int height);

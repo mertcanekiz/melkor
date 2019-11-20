@@ -2,6 +2,8 @@
 #define EVENT_H
 
 #include <time.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 /* Enums */
 typedef enum EventType {
@@ -29,6 +31,7 @@ typedef struct Event
     EventCategory category;
 } Event;
 
+typedef void (*EventCallback)(Event*);
 typedef struct WindowCloseEvent
 {
     Event super;
@@ -54,7 +57,7 @@ typedef struct KeyRepeatEvent {
 
 typedef struct KeyTypeEvent {
     Event super;
-    int key;
+    int codepoint;
 } KeyTypeEvent;
 
 typedef struct CursorPosEvent {
@@ -97,4 +100,7 @@ typedef struct WindowFocusEvent {
     Event super;
     bool focus;
 } WindowFocusEvent;
+
+void dispatch_event(Event* event, EventType type, EventCallback callback);
+void print_event(Event* event);
 #endif

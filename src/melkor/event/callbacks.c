@@ -1,5 +1,6 @@
 #include "callbacks.h"
 #include "event.h"
+#include "core/window.h"
 #include <time.h>
 
 void window_close_callback(GLFWwindow* window)
