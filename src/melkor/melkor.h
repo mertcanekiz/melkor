@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "app.h"
-#include "window.h"
+#include "core/app.h"
+#include "core/window.h"
 
 #endif
