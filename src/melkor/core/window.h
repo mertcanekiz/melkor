@@ -8,32 +8,8 @@
 #include <GLFW/glfw3.h>
 
 #include "event/event.h"
+#include "event/callbacks.h"
 
-/* Callback typedefs */
-typedef void (*KeyCallback)(GLFWwindow *window, int key, int scancode, int action, int mods);
-typedef void (*CharCallback)(GLFWwindow *window, unsigned int codepoint);
-typedef void (*CursorPosCallback)(GLFWwindow *window, double xpos, double ypos);
-typedef void (*MouseButtonCallback)(GLFWwindow *window, int button, int action, int mods);
-typedef void (*ScrollCallback)(GLFWwindow *window, double xoffset, double yoffset);
-typedef void (*WindowCloseCallback)(GLFWwindow* window);
-typedef void (*WindowSizeCallback)(GLFWwindow* window, int width, int height);
-typedef void (*WindowPosCallback)(GLFWwindow* window, int xpos, int ypos);
-typedef void (*WindowFocusCallback)(GLFWwindow* window, int focus);
-typedef void (*EventCallback)(Event*);
-
-typedef enum CallbackType {
-    KEY_CALLBACK = 0,
-    CHAR_CALLBACK,
-    CURSOR_POS_CALLBACK,
-    MOUSE_BUTTON_CALLBACK,
-    SCROLL_CALLBACK,
-    WINDOW_CLOSE_CALLBACK,
-    WINDOW_SIZE_CALLBACK,
-    WINDOW_POS_CALLBACK,
-    WINDOW_FOCUS_CALLBACK
-} CallbackType;
-
-// typedef struct WindowData WindowData;
 typedef struct WindowData
 {
     const char *title;

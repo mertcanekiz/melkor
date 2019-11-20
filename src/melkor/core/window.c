@@ -66,7 +66,7 @@ void event_callback(Event *event)
             break;
         }
         default:
-            printf("Unknown event\n");
+            printf("Unknown event\n"); // This should never happen
     }
 }
 
@@ -94,44 +94,19 @@ Window* create_window(const char* title, uint16_t width,
     }
     glfwMakeContextCurrent(window->handle);
     glfwSetWindowUserPointer(window->handle, &(window->data));
-    return window;
-}
 
-void set_callback(Window *window, CallbackType type, void* callback)
-{
-    switch (type)
-    {
-        case KEY_CALLBACK:
-            glfwSetKeyCallback(window->handle, (KeyCallback)callback);
-            break;
-        case CHAR_CALLBACK:
-            glfwSetCharCallback(window->handle, (CharCallback)callback);
-            break;
-        case CURSOR_POS_CALLBACK:
-            glfwSetCursorPosCallback(window->handle, (CursorPosCallback)callback);
-            break;
-        case MOUSE_BUTTON_CALLBACK:
-            glfwSetMouseButtonCallback(window->handle, (MouseButtonCallback)callback);
-            break;
-        case SCROLL_CALLBACK:
-            glfwSetScrollCallback(window->handle, (ScrollCallback)callback);
-            break;
-        case WINDOW_CLOSE_CALLBACK:
-            glfwSetWindowCloseCallback(window->handle, (WindowCloseCallback)callback);
-            break;
-        case WINDOW_SIZE_CALLBACK:
-            glfwSetWindowSizeCallback(window->handle, (WindowSizeCallback)callback);
-            break;
-        case WINDOW_POS_CALLBACK:
-            glfwSetWindowPosCallback(window->handle, (WindowPosCallback)callback);
-            break;
-        case WINDOW_FOCUS_CALLBACK:
-            glfwSetWindowFocusCallback(window->handle, (WindowFocusCallback)callback);
-            break;
-        default:
-            printf("Invalid callback type: %d\n", type);
-            return;
-    }
+    /* Set default callbacks */
+    glfwSetKeyCallback(window->handle, &key_callback);
+    glfwSetCharCallback(window->handle, &char_callback);
+    glfwSetCursorPosCallback(window->handle, &cursor_pos_callback);
+    glfwSetMouseButtonCallback(window->handle, &mouse_button_callback);
+    glfwSetScrollCallback(window->handle, &scroll_callback);
+    glfwSetWindowCloseCallback(window->handle, &window_close_callback);
+    glfwSetWindowSizeCallback(window->handle, &window_size_callback);
+    glfwSetWindowPosCallback(window->handle, &window_pos_callback);
+    glfwSetWindowFocusCallback(window->handle, &window_focus_callback);
+
+    return window;
 }
 
 void destroy_window(Window* window)
